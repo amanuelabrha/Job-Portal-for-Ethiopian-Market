@@ -1,0 +1,31 @@
+{
+  "meta": {
+    "title": "Ethiopia Job Portal",
+    "description": "Find jobs and hire talent across Ethiopia — ETB salaries, Amharic support, mobile-first."
+  },
+  "nav": {
+    "jobs": "Jobs",
+    "login": "Login",
+    "register": "Register",
+    "dashboard": "Dashboard",
+    "employer": "Employer"
+  },
+  "home": {
+    "hero": "Build your career or your team — built for Ethiopia",
+    "sub": "Search roles in Addis Ababa and nationwide. Salaries in Ethiopian Birr (ETB). Job alerts by email or SMS.",
+    "ctaJobs": "Browse jobs",
+    "ctaRegister": "Create account"
+  },
+  "jobs": {
+    "title": "Open positions",
+    "city": "City",
+    "category": "Category",
+    "salary": "Salary (ETB)",
+    "type": "Type",
+    "apply": "Apply",
+    "detail": "Details"
+  },
+  "footer": {
+    "note": "Times shown in Africa/Addis_Ababa (UTC+3). Premium listings support local payments (Chapa, Telebirr — configure in production)."
+  }
+}

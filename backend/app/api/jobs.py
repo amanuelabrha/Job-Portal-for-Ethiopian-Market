@@ -60,10 +60,13 @@ def list_jobs(
         city=city, category=category, salary_min=salary_min, salary_max=salary_max, job_type=job_type, q=q
     )
     cache_key = f"jobs:list:{hashlib.md5(json.dumps(filters.model_dump(), sort_keys=True).encode()).hexdigest()}:{page}:{page_size}"
-    cached = redis_client.get(cache_key)
-    if cached:
-        data = json.loads(cached)
-        return [JobOut.model_validate(x) for x in data]
+    try:
+        cached = redis_client.get(cache_key)
+        if cached:
+            data = json.loads(cached)
+            return [JobOut.model_validate(x) for x in data]
+    except Exception:
+        logger.debug("Redis cache miss or unavailable", exc_info=True)
 
     query = (
         db.query(Job)
@@ -80,14 +83,20 @@ def list_jobs(
     if salary_max is not None:
         query = query.filter(or_(Job.salary_min_etb.is_(None), Job.salary_min_etb <= salary_max))
     if job_type:
-        query = query.filter(Job.job_type == JobType(job_type))
+        try:
+            query = query.filter(Job.job_type == JobType(job_type))
+        except ValueError as e:
+            raise HTTPException(400, "Invalid job_type") from e
     if q:
         like = f"%{q}%"
         query = query.filter(or_(Job.title_en.ilike(like), Job.description_en.ilike(like)))
 
     rows = query.offset((page - 1) * page_size).limit(page_size).all()
     out = [_job_to_out(j) for j in rows]
-    redis_client.setex(cache_key, 60, json.dumps([o.model_dump(mode="json") for o in out], default=str))
+    try:
+        redis_client.setex(cache_key, 60, json.dumps([o.model_dump(mode="json") for o in out], default=str))
+    except Exception:
+        logger.debug("Redis set failed", exc_info=True)
     return out
 
 

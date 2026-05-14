@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Amharic script: prefer system fonts with Ethiopic glyphs on mobile devices common in ET. */
+html[lang="am"] body {
+  font-family: system-ui, "Noto Sans Ethiopic", "Nyala", sans-serif;
+}

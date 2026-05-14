@@ -50,7 +50,15 @@ async def dispatch_job_alerts(db: Session, job: Job) -> None:
                 logger.exception("email alert failed: %s", e)
         if a.notify_sms and user.phone:
             body = f"Job alert: {job.title_en} in {job.city}. Log in to apply."
-            phone = user.phone if user.phone.startswith("+") else f"+251{user.phone.lstrip('0')}"
+            p = user.phone.strip().replace(" ", "")
+            if p.startswith("+251"):
+                phone = p
+            elif p.startswith("0"):
+                phone = "+251" + p[1:]
+            elif p.startswith("251"):
+                phone = "+" + p
+            else:
+                phone = "+251" + p
             try:
                 await send_sms(phone, body)
             except Exception as e:

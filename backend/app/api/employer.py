@@ -5,7 +5,7 @@ from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException
 from sqlalchemy.orm import Session, joinedload
 
 from app.database import SessionLocal, get_db
-from app.deps import get_current_user, get_redis, require_roles
+from app.deps import get_redis, require_roles
 from app.models import (
     Application,
     ApplicationStatus,

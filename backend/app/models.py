@@ -57,7 +57,7 @@ class User(Base):
     phone: Mapped[Optional[str]] = mapped_column(String(32), unique=True, nullable=True, index=True)
     hashed_password: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
     google_sub: Mapped[Optional[str]] = mapped_column(String(255), unique=True, nullable=True)
-    role: Mapped[UserRole] = mapped_column(Enum(UserRole), nullable=False)
+    role: Mapped[UserRole] = mapped_column(Enum(UserRole, native_enum=False), nullable=False)
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
     preferred_locale: Mapped[str] = mapped_column(String(8), default="en")  # en | am | om ...
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
@@ -168,7 +168,7 @@ class Job(Base):
     city: Mapped[str] = mapped_column(String(128), index=True)
     salary_min_etb: Mapped[Optional[int]] = mapped_column(Integer, nullable=True)
     salary_max_etb: Mapped[Optional[int]] = mapped_column(Integer, nullable=True)
-    job_type: Mapped[JobType] = mapped_column(Enum(JobType), default=JobType.full_time)
+    job_type: Mapped[JobType] = mapped_column(Enum(JobType, native_enum=False), default=JobType.full_time)
     deadline: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
     is_premium: Mapped[bool] = mapped_column(Boolean, default=False)
     is_published: Mapped[bool] = mapped_column(Boolean, default=True)
@@ -199,7 +199,9 @@ class Application(Base):
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     job_id: Mapped[int] = mapped_column(ForeignKey("jobs.id", ondelete="CASCADE"), index=True)
     seeker_user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
-    status: Mapped[ApplicationStatus] = mapped_column(Enum(ApplicationStatus), default=ApplicationStatus.submitted)
+    status: Mapped[ApplicationStatus] = mapped_column(
+        Enum(ApplicationStatus, native_enum=False), default=ApplicationStatus.submitted
+    )
     cover_letter: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
     resume_path_snapshot: Mapped[Optional[str]] = mapped_column(String(1024), nullable=True)
     match_score: Mapped[Optional[float]] = mapped_column(Float, nullable=True)  # 0..1 TF-IDF cosine
@@ -242,6 +244,6 @@ class Payment(Base):
     provider: Mapped[str] = mapped_column(String(32))  # chapa | telebirr
     external_id: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
     amount_etb: Mapped[int] = mapped_column(Integer)
-    status: Mapped[PaymentStatus] = mapped_column(Enum(PaymentStatus), default=PaymentStatus.pending)
+    status: Mapped[PaymentStatus] = mapped_column(Enum(PaymentStatus, native_enum=False), default=PaymentStatus.pending)
     raw_payload: Mapped[Optional[dict]] = mapped_column(JSON, nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)

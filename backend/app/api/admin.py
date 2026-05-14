@@ -4,6 +4,7 @@ from sqlalchemy.orm import Session
 from app.database import get_db
 from app.deps import require_roles
 from app.models import Job, User, UserRole
+from app.schemas import UserActiveBody
 
 router = APIRouter(prefix="/admin", tags=["admin"])
 
@@ -29,14 +30,14 @@ def list_users(
 @router.patch("/users/{user_id}/active")
 def set_user_active(
     user_id: int,
-    active: bool,
+    body: UserActiveBody,
     db: Session = Depends(get_db),
     _: User = Depends(require_roles(UserRole.admin)),
 ):
     u = db.query(User).filter(User.id == user_id).first()
     if not u:
         raise HTTPException(404, "User not found")
-    u.is_active = active
+    u.is_active = body.active
     db.commit()
     return {"ok": True}
 

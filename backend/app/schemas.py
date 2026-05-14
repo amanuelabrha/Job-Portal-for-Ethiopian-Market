@@ -215,6 +215,10 @@ class MessageCreate(BaseModel):
     application_id: Optional[int] = None
 
 
+class UserActiveBody(BaseModel):
+    active: bool
+
+
 class PaymentInitRequest(BaseModel):
     job_id: int
     amount_etb: int = Field(ge=100, le=500_000)
