@@ -7,14 +7,23 @@
     "jobs": "Jobs",
     "login": "Login",
     "register": "Register",
-    "dashboard": "Dashboard",
-    "employer": "Employer"
+    "dashboard": "My dashboard",
+    "employer": "For employers",
+    "logout": "Log out"
   },
   "home": {
     "hero": "Build your career or your team — built for Ethiopia",
     "sub": "Search roles in Addis Ababa and nationwide. Salaries in Ethiopian Birr (ETB). Job alerts by email or SMS.",
     "ctaJobs": "Browse jobs",
-    "ctaRegister": "Create account"
+    "ctaRegister": "Create account",
+    "ctaLogin": "Sign in",
+    "demoTitle": "Try the demo",
+    "demoSub": "Use these accounts to explore the full portal — profile, applications, employer analytics, and Amharic-ready job posts.",
+    "statJobs": "Live job posts",
+    "statCities": "Ethiopian cities",
+    "statCurrency": "Salaries in",
+    "featuredJobs": "Featured openings",
+    "viewAll": "View all jobs →"
   },
   "jobs": {
     "title": "Open positions",
@@ -22,10 +31,56 @@
     "category": "Category",
     "salary": "Salary (ETB)",
     "type": "Type",
-    "apply": "Apply",
-    "detail": "Details"
+    "apply": "Apply now",
+    "detail": "Details",
+    "search": "Search",
+    "searchPlaceholder": "Search title or description…",
+    "allCities": "All cities",
+    "allCategories": "All categories",
+    "allTypes": "All types",
+    "loading": "Loading jobs…",
+    "empty": "No jobs match your filters.",
+    "loginToApply": "Sign in as a job seeker to apply.",
+    "applied": "Applied",
+    "applySuccess": "Application submitted!",
+    "employerCannotApply": "Employers cannot apply to jobs. Switch to a seeker account."
   },
   "footer": {
-    "note": "Times shown in Africa/Addis_Ababa (UTC+3). Premium listings support local payments (Chapa, Telebirr — configure in production)."
+    "note": "Times shown in Africa/Addis_Ababa (UTC+3). Premium listings support Chapa & Telebirr.",
+    "tagline": "Ethiopia's mobile-first job marketplace — ETB salaries, bilingual posts, smart matching.",
+    "links": "Quick links",
+    "locale": "Region & time",
+    "rights": "All rights reserved"
+  },
+  "auth": {
+    "signIn": "Sign in",
+    "signInSub": "Access your dashboard, applications, and saved alerts.",
+    "quickLogin": "Quick login as",
+    "createAccount": "Create account",
+    "haveAccount": "Already have an account?",
+    "noAccount": "Don't have an account?",
+    "roleSeeker": "Job seeker",
+    "roleEmployer": "Employer",
+    "signingIn": "Signing in…",
+    "creating": "Creating account…"
+  },
+  "dashboard": {
+    "seekerTitle": "Job seeker dashboard",
+    "employerTitle": "Employer dashboard",
+    "myApplications": "My applications",
+    "jobAlerts": "Job alerts",
+    "browseJobs": "Browse more jobs",
+    "editProfile": "Edit profile",
+    "saveProfile": "Save changes",
+    "saved": "Profile saved",
+    "yourJobs": "Your job posts",
+    "applicants": "Applicants",
+    "rankedBy": "Ranked by skill match (TF-IDF)",
+    "shortlist": "Shortlist",
+    "reject": "Reject",
+    "views": "Views",
+    "applications": "Applications",
+    "conversion": "Conversion",
+    "selectJob": "Select a job to view applicants"
   }
 }

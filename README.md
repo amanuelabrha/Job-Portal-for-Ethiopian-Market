@@ -50,19 +50,21 @@ Production-oriented monorepo for a **job marketplace tailored to Ethiopia**: ETB
 
 | Role | Email | Password |
 |------|--------|----------|
-| Admin | `admin@ethiojobs.et` | `Admin12345!` |
+| **Featured seeker** | `amanuelabrha02@gmail.com` | `12345678` |
 | Employer | `employer@ethiojobs.et` | `Employer123!` |
-| Seeker | `seeker@ethiojobs.et` | `Seeker123!` |
+| Admin | `admin@ethiojobs.et` | `Admin12345!` |
+
+Re-load demo data anytime: `python -m app.seed --force`
 
 ## Local development (without Docker)
 
-**Backend**
+**Backend** (Windows: use `py` if `python` is not found; **3.12–3.14** supported)
 
 ```bash
 cd backend
-python -m venv .venv
-.venv\Scripts\activate   # Windows
-pip install -r requirements.txt
+py -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+# Optional: .\.venv\Scripts\Activate.ps1  (if PowerShell allows scripts)
 # Set DATABASE_URL, REDIS_URL, JWT_* in .env or environment
 uvicorn app.main:app --reload --port 8000
 python -m app.seed

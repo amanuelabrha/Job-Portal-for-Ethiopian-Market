@@ -1,59 +1,79 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
+import { Link, useRouter } from "@/i18n/navigation";
+import { login } from "@/lib/api";
+import { useAuth } from "@/components/AuthProvider";
+import { DEMO_SEEKER } from "@/lib/constants";
+import { DemoCredentials } from "@/components/DemoCredentials";
+import { cardClass, btnPrimary, Input, PageHeader } from "@/components/ui";
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const t = useTranslations("auth");
+  const [email, setEmail] = useState(DEMO_SEEKER.email);
+  const [password, setPassword] = useState(DEMO_SEEKER.password);
   const [err, setErr] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const { refresh, setUser } = useAuth();
 
-  async function onSubmit(e: React.FormEvent) {
+  async function doLogin(e: React.FormEvent, em?: string, pw?: string) {
     e.preventDefault();
     setErr(null);
-    const base = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
-    const res = await fetch(`${base}/api/v1/auth/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
-    if (!res.ok) {
-      setErr("Login failed");
-      return;
+    setLoading(true);
+    try {
+      const me = await login(em ?? email, pw ?? password);
+      setUser(me);
+      await refresh();
+      if (me.role === "employer") router.push("/dashboard/employer");
+      else if (me.role === "admin") router.push("/jobs");
+      else router.push("/dashboard/seeker");
+    } catch (ex) {
+      setErr(ex instanceof Error ? ex.message : "Login failed");
+    } finally {
+      setLoading(false);
     }
-    const data = await res.json();
-    localStorage.setItem("access_token", data.access_token);
-    localStorage.setItem("refresh_token", data.refresh_token);
-    router.push("/dashboard/seeker");
   }
 
   return (
-    <div className="mx-auto max-w-md rounded-xl border border-stone-200 bg-white p-6 shadow-sm">
-      <h1 className="text-xl font-bold">Login</h1>
-      <p className="mt-1 text-sm text-stone-500">Use seeker@ethiojobs.et / Seeker123! after seed.</p>
-      <form onSubmit={onSubmit} className="mt-4 space-y-3">
-        <input
-          type="email"
-          required
-          className="w-full rounded border border-stone-300 px-3 py-2"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          required
-          className="w-full rounded border border-stone-300 px-3 py-2"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        {err ? <p className="text-sm text-red-600">{err}</p> : null}
-        <button type="submit" className="w-full rounded-lg bg-brand py-2 font-semibold text-white hover:bg-brand-dark">
-          Sign in
+    <div className="mx-auto max-w-lg space-y-8">
+      <PageHeader title={t("signIn")} subtitle={t("signInSub")} />
+      <div className={cardClass}>
+        <form onSubmit={(e) => void doLogin(e)} className="space-y-4">
+          <div>
+            <label className="mb-1 block text-sm font-medium text-stone-700">Email</label>
+            <Input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
+          </div>
+          <div>
+            <label className="mb-1 block text-sm font-medium text-stone-700">Password</label>
+            <Input type="password" required value={password} onChange={(e) => setPassword(e.target.value)} />
+          </div>
+          {err ? <p className="text-sm text-red-600">{err}</p> : null}
+          <button type="submit" disabled={loading} className={`${btnPrimary} w-full`}>
+            {loading ? t("signingIn") : t("signIn")}
+          </button>
+        </form>
+        <button
+          type="button"
+          className="mt-4 w-full rounded-lg border border-brand/30 bg-teal-50 py-2.5 text-sm font-medium text-brand hover:bg-teal-100"
+          disabled={loading}
+          onClick={(e) => {
+            setEmail(DEMO_SEEKER.email);
+            setPassword(DEMO_SEEKER.password);
+            void doLogin(e, DEMO_SEEKER.email, DEMO_SEEKER.password);
+          }}
+        >
+          {t("quickLogin")} {DEMO_SEEKER.name}
         </button>
-      </form>
+        <p className="mt-4 text-center text-sm text-stone-600">
+          {t("noAccount")}{" "}
+          <Link href="/register" className="font-medium text-brand hover:underline">
+            {t("createAccount")}
+          </Link>
+        </p>
+      </div>
+      <DemoCredentials />
     </div>
   );
 }

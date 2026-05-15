@@ -2,7 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Amharic script: prefer system fonts with Ethiopic glyphs on mobile devices common in ET. */
-html[lang="am"] body {
-  font-family: system-ui, "Noto Sans Ethiopic", "Nyala", sans-serif;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-stone-50 text-stone-900 antialiased;
+  }
+
+  /* Amharic: Ethiopic-friendly fonts on mobile (common in ET) */
+  html[lang="am"] body {
+    font-family: system-ui, "Noto Sans Ethiopic", "Nyala", sans-serif;
+  }
+}
+
+@layer components {
+  .link-brand {
+    @apply font-medium text-brand hover:text-brand-dark hover:underline;
+  }
 }

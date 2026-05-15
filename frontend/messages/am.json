@@ -1,20 +1,29 @@
 {
   "meta": {
     "title": "የኢትዮጵያ ሥራ ፖርታል",
-    "description": "በኢትዮጵያ ውስጥ ሥራ ያግኙ ወይም ታላቅ ቡድን ይቅጠሩ — በብር (ETB) ደሞዝ፣ በአማርኛ ድጋፍ።"
+    "description": "በኢትዮጵያ ውስጥ ሥራ ያግኙ ወይም ቡድን ይቅጠሩ — በብር (ETB) ደሞዝ።"
   },
   "nav": {
     "jobs": "ሥራዎች",
     "login": "ግባ",
     "register": "ተመዝገብ",
     "dashboard": "ዳሽቦርድ",
-    "employer": "Employer"
+    "employer": "ለአሰሪዎች",
+    "logout": "ውጣ"
   },
   "home": {
     "hero": "ሙያዎን ወይም ቡድንዎን ይገንቡ — ለኢትዮጵያ የተሰራ",
-    "sub": "በአዲስ አበባ እና በሀገሪቱ ውስጥ ሥራ ይፈልጉ። ደሞዝ በኢትዮጵያ ብር። በኢሜይል ወይም በኤስኤምኤስ ማስታወቂያ።",
+    "sub": "በአዲስ አበባ እና በሀገሪቱ ውስጥ ሥራ ይፈልጉ።",
     "ctaJobs": "ሥራዎችን ይመልከቱ",
-    "ctaRegister": "መለያ ይፍጠሩ"
+    "ctaRegister": "መለያ ይፍጠሩ",
+    "ctaLogin": "ግባ",
+    "demoTitle": "ዴሞን ይሞክሩ",
+    "demoSub": "ሙሉ ፖርታሉን ለመመልከት እነዚህ መለያዎችን ይጠቀሙ።",
+    "statJobs": "ክፍት ሥራዎች",
+    "statCities": "ከተሞች",
+    "statCurrency": "ደሞዝ",
+    "featuredJobs": "የተመረጡ ሥራዎች",
+    "viewAll": "ሁሉንም →"
   },
   "jobs": {
     "title": "ክፍት የሥራ ቦታዎች",
@@ -22,10 +31,56 @@
     "category": "ምድብ",
     "salary": "ደሞዝ (ብር)",
     "type": "አይነት",
-    "apply": "ይጫኑ",
-    "detail": "ዝርዝር"
+    "apply": "ያመልክቱ",
+    "detail": "ዝርዝር",
+    "search": "ፈልግ",
+    "searchPlaceholder": "ርዕስ ወይም መግለጫ…",
+    "allCities": "ሁሉም ከተሞች",
+    "allCategories": "ሁሉም ምድቦች",
+    "allTypes": "ሁሉም አይነቶች",
+    "loading": "በመጫን ላይ…",
+    "empty": "ምንም ሥራ አልተገኘም።",
+    "loginToApply": "ለመመለከት ይግቡ።",
+    "applied": "ተመዝገቧል",
+    "applySuccess": "በተሳካ ሁኔታ ቀርቧል!",
+    "employerCannotApply": "አሰሪዎች ሊያመለክቱ አይችሉም።"
   },
   "footer": {
-    "note": "ጊዜ በ አፍሪካ/አዲስ_አበባ (UTC+3)። ክፍል ለክፍል ክፍያ Chapa፣ Telebirr (በምርት ዙሪያ ያዋቅሩ)።"
+    "note": "ጊዜ በ አፍሪካ/አዲስ_አበባ (UTC+3)።",
+    "tagline": "የኢትዮጵያ ሞባይል-መጀመሪያ የሥራ ገበያ።",
+    "links": "አገናኞች",
+    "locale": "ክልል እና ጊዜ",
+    "rights": "መብቶች የተጠበቁ"
+  },
+  "auth": {
+    "signIn": "ግባ",
+    "signInSub": "ዳሽቦርድዎን፣ ማመልከቻዎችን እና ማስታወቂያዎችን ይመልከቱ።",
+    "quickLogin": "ፈጣን ግባ",
+    "createAccount": "መለያ ይፍጠሩ",
+    "haveAccount": "መለያ አለዎት?",
+    "noAccount": "መለያ የለዎትም?",
+    "roleSeeker": "የሥራ ፈላጊ",
+    "roleEmployer": "አሰሪ",
+    "signingIn": "በመግባት ላይ…",
+    "creating": "በመፍጠር ላይ…"
+  },
+  "dashboard": {
+    "seekerTitle": "የሥራ ፈላጊ ዳሽቦርድ",
+    "employerTitle": "የአሰሪ ዳሽቦርድ",
+    "myApplications": "ማመልከቻዎቼ",
+    "jobAlerts": "የሥራ ማስታወቂያዎች",
+    "browseJobs": "ተጨማሪ ሥራዎች",
+    "editProfile": "መገለጫ አርትዕ",
+    "saveProfile": "ለውጦችን አስቀምጥ",
+    "saved": "ተቀምጧል",
+    "yourJobs": "የእርስዎ ማስታወቂያዎች",
+    "applicants": "አመልካቾች",
+    "rankedBy": "በስkill መሰረት ደረጃ",
+    "shortlist": "ምርጥ ዝርዝር",
+    "reject": "አትቀበል",
+    "views": "እይታዎች",
+    "applications": "ማመልከቻዎች",
+    "conversion": "መቀየር",
+    "selectJob": "አመልካቾችን ለማየት ሥራ ይምረጡ"
   }
 }

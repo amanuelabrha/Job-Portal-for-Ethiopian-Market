@@ -1,9 +1,10 @@
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
+import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { Providers } from "@/components/Providers";
 import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -22,16 +23,15 @@ export default async function LocaleLayout({
   }
   setRequestLocale(locale);
   const messages = await getMessages();
-  const footer = await getTranslations("footer");
 
   return (
     <NextIntlClientProvider messages={messages}>
       <Providers locale={locale}>
-        <SiteHeader locale={locale} />
-        <main className="mx-auto max-w-5xl px-4 py-8">{children}</main>
-        <footer className="border-t border-stone-200 bg-white px-4 py-6 text-center text-sm text-stone-600">
-          <p>{footer("note")}</p>
-        </footer>
+        <div className="flex min-h-screen flex-col">
+          <SiteHeader locale={locale} />
+          <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8 sm:px-6">{children}</main>
+          <SiteFooter />
+        </div>
       </Providers>
     </NextIntlClientProvider>
   );
